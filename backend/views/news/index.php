@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
             return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) .
+            Html::img($model->image_url) .
             '<br><i>' . $model->preview . '</i>' .
             '<br><i>' . $model->date_create . '</i>';
         },

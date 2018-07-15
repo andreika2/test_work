@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 
+
 /**
  * This is the model class for table "news".
  *
@@ -36,7 +37,7 @@ class News extends \yii\db\ActiveRecord
             [['creator_id'], 'integer'],
             [['title', 'image_url'], 'string', 'max' => 255],
             [['preview'], 'string', 'max' => 1000],
-            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'extensions' => 'png, jpg', 'checkExtensionByMimeType'=>false],
         ];
     }
 
@@ -56,9 +57,12 @@ class News extends \yii\db\ActiveRecord
     }
 
     public function uploadImage(){
-        if (!$this->validate()) {
-            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            $this->image_url = Yii::getAlias('@app') . '/' . 'uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
+        if ($this->validate() && isset($this->imageFile)) {
+            $path = Yii::getAlias('@test') . '/' . 'uploads/' . Yii::$app->security->generateRandomString(20) . '.' . $this->imageFile->extension;
+            // print_r($path);exit;
+            $this->imageFile->saveAs($path);
+            // $this->save();
+            $this->image_url = $path;
             return true;
         } else {
             return false;
