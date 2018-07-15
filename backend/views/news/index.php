@@ -21,8 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) .
-            Html::img($model->image_url) .
+            return 
+            Html::img(Yii::getAlias('@web') . '/uploads/' . $model->image_url) . '<br>' .  
+            Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) .
             '<br><i>' . $model->preview . '</i>' .
             '<br><i>' . $model->date_create . '</i>';
         },

@@ -132,7 +132,10 @@ class NewsController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        unlink($model->image_url);
+        if(isset($model->image_url)){
+            unlink($model->image_url);
+        }
+        
         $model->delete();
 
         return $this->redirect(['index']);

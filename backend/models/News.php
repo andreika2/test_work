@@ -58,11 +58,12 @@ class News extends \yii\db\ActiveRecord
 
     public function uploadImage(){
         if ($this->validate() && isset($this->imageFile)) {
-            $path = Yii::getAlias('@test') . '/' . 'uploads/' . Yii::$app->security->generateRandomString(20) . '.' . $this->imageFile->extension;
+            $name = Yii::$app->security->generateRandomString(20) . '.' . $this->imageFile->extension;
+            $path = Yii::getAlias('@backend') . '/web/uploads/' . $name;
             // print_r($path);exit;
             $this->imageFile->saveAs($path);
             // $this->save();
-            $this->image_url = $path;
+            $this->image_url = $name;
             return true;
         } else {
             return false;
