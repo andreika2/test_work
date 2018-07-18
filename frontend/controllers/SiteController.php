@@ -12,6 +12,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\data\ActiveDataProvider;
+use app\models\News;
 
 /**
  * Site controller
@@ -96,6 +98,18 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionShowNews(){
+        $dataProvider = new ActivedataProvider([
+            'query' => News::find(),
+            'pagination' => [
+                'pageSize' => 4
+            ]
+        ]);
+        return $this->render('show-news',[
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     /**

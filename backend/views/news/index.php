@@ -21,11 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
-            return 
-            Html::img(Yii::getAlias('@web') . '/uploads/' . $model->image_url) . '<br>' .  
+            return '<div class="col-md-5">' .
+            '<div class="panel panel-default">'.
+            Html::img(Yii::getAlias('@web') . '/uploads/' . $model->image_url,['widht'=>'200px' ,'height' => '200px']) . '<br>' .  
             Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) .
             '<br><i>' . $model->preview . '</i>' .
-            '<br><i>' . $model->date_create . '</i>';
+            '<br><i>' . $model->date_create . '</i>'
+            .'</div>'
+            .'</div>';
         },
     ]) ?>
 </div>

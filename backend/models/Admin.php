@@ -25,13 +25,13 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    // public function rules()
-    // {
-    //     return [
-    //         [['login'], 'string', 'max' => 50],
-    //         [['user_password'], 'string', 'max' => 255],
-    //     ];
-    // }
+    public function rules()
+    {
+        return [
+            [['login'], 'string', 'max' => 50],
+            [['user_password'], 'string', 'max' => 255],
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -50,7 +50,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne($id);
     }
 
      /**
@@ -58,7 +58,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return $this->getPrimaryKey();
+        return $this->id;
     }
 
     /**

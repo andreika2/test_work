@@ -38,6 +38,9 @@ class NewsController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => News::find(),
+            'pagination' => [
+                'pageSize' => 4
+            ]
         ]);
 
         if (Yii::$app->request->isPost) {
@@ -132,9 +135,9 @@ class NewsController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if(isset($model->image_url)){
-            unlink($model->image_url);
-        }
+      //  if(isset($model->image_url)){
+      //      unlink($model->image_url);
+      //  }
         
         $model->delete();
 
